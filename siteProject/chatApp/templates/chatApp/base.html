@@ -9,17 +9,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="{% static 'chatApp/css/main.css' %}">
     {% block extra_css %}{% endblock %}
+    <!-- Background and filter styles moved to main.css for valid CSS -->
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <span class="brand"><img src="{% static 'chatApp/img/logo.svg' %}" alt="Logo" style="height:1.2em;vertical-align:middle;margin-right:6px;"> Real-Time Chat</span>
+            <span class="brand">
+                <img src="{% static 'chatApp/img/logo.svg' %}" alt="Logo"> Real-Time Chat
+            </span>
             <span class="auth-links">
                 {% if user.is_authenticated %}
-                    <span style="font-size: 0.95rem;">Welcome, {{ user.username }}!
+                    <span style="font-size: 0.98rem; font-weight: 500;">Welcome, {{ user.username }}!
                         <form action="{% url 'logout' %}" method="post" style="display:inline; margin:0; padding:0;">
                             {% csrf_token %}
-                            <button type="submit" style="background:none; border:none; color:#007bff; text-decoration:underline; cursor:pointer; font:inherit; padding:0; margin-left:4px;">Sign out</button>
+                            <button type="submit">Sign out</button>
                         </form>
                     </span>
                 {% else %}
@@ -29,7 +32,7 @@
         </div>
         {% block content %}{% endblock %}
         <div class="footer">
-            <p>Powered by Real-Time Chat</p>
+            <p><i class="fas fa-bolt"></i> Powered by <span style="font-weight:600;color:#6366f1;">Real-Time Chat</span></p>
         </div>
     </div>
     <script src="{% static 'chatApp/js/main.js' %}"></script>

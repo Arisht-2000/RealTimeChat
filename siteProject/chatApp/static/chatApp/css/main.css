@@ -4,18 +4,170 @@
 @import url('./form.css');
 @import url('./responsive.css');
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e0e7ff 0%, #f4f4f9 100%);
+    min-height: 100vh;
     margin: 0;
     padding: 0;
+    /* Subtle pattern overlay */
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='40' fill='%23f4f4f9'/%3E%3Ccircle cx='20' cy='20' r='1.5' fill='%239ca3af' fill-opacity='0.12'/%3E%3C/svg%3E");
+    /* Modernize: add smooth fade-in, more whitespace, and subtle shadow */
+    animation: fadeInBg 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes fadeInBg {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 .container {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 400px;
+    background: rgba(255,255,255,0.98);
+    padding: 40px 32px 32px 32px;
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    width: 100%;
+    max-width: 600px;
+    min-height: 60vh;
+    margin: 56px auto 0 auto;
     text-align: center;
-    margin: 40px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Add subtle border for depth */
+    border: 1.5px solid #e0e7ff;
+}
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    background: transparent;
+    /* Add subtle bottom border */
+    border-bottom: 1px solid #e0e7ff;
+    padding-bottom: 10px;
+}
+.brand {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #4f46e5;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Add subtle text shadow for branding */
+    text-shadow: 0 2px 8px #e0e7ff;
+}
+.auth-links {
+    font-size: 1.08rem;
+    color: #6366f1;
+    font-weight: 500;
+    gap: 12px;
+    display: flex;
+    align-items: center;
+}
+h1 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin: 22px 0 12px 0;
+    color: #37376b;
+    letter-spacing: 0.5px;
+}
+p {
+    color: #5a5a7a;
+    margin-bottom: 22px;
+    font-size: 1.08rem;
+}
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    max-width: 360px;
+    padding: 14px 18px;
+    border: 1.5px solid #c7d2fe;
+    border-radius: 14px;
+    font-size: 1.13rem;
+    margin-bottom: 18px;
+    background: #f8fafc;
+    transition: border 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(99,102,241,0.04);
+}
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border-color: #6366f1;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+}
+button {
+    background: linear-gradient(90deg, #6366f1 0%, #818cf8 100%);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 32px;
+    font-size: 1.13rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(99,102,241,0.10);
+    margin-bottom: 12px;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    letter-spacing: 0.2px;
+}
+button:hover, button:focus {
+    background: linear-gradient(90deg, #818cf8 0%, #6366f1 100%);
+    box-shadow: 0 4px 20px rgba(99,102,241,0.16);
+    transform: translateY(-2px) scale(1.03);
+}
+.footer {
+    margin-top: 40px;
+    color: #a1a1aa;
+    font-size: 1.02rem;
+    background: transparent;
+    border-top: 1px solid #e0e7ff;
+    padding-top: 12px;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    background: #e0e7ff;
+}
+::-webkit-scrollbar-thumb {
+    background: #c7d2fe;
+    border-radius: 8px;
+}
+/* Modern icon style for SVGs in .brand */
+.brand svg {
+    height: 2.2rem;
+    width: 2.2rem;
+    margin-right: 6px;
+    filter: drop-shadow(0 2px 8px #e0e7ff);
+}
+/* Add subtle fade-in for .container */
+.container {
+    animation: fadeInContainer 1.1s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes fadeInContainer {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
+}
+/* Responsive tweaks for modern look */
+@media (max-width: 700px) {
+    .container {
+        max-width: 98vw;
+        padding: 18px 4vw 18px 4vw;
+        margin: 24px auto 0 auto;
+    }
+    .header, .footer {
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+    .brand {
+        font-size: 1.3rem;
+    }
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    background:
+      url('../img/logo.svg') no-repeat right 2vw bottom 2vw/120px auto,
+      url('../img/vite.svg') no-repeat left 2vw top 2vw/80px auto;
+    opacity: 0.09;
+    pointer-events: none;
+    -webkit-filter: blur(0.5px) grayscale(0.1);
+    filter: blur(0.5px) grayscale(0.1);
 }
