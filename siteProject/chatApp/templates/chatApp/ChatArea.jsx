@@ -6,6 +6,49 @@ const ChatArea = () => {
   ]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef(null);
+  const ws = useRef(null);
+
+  // Get roomname from URL (assuming /chatroom/<roomname>/)
+  const getRoomName = () => {
+    const match = window.location.pathname.match(/\/chatroom\/(.+?)\//);
+    const roomname = match ? match[1] : "default";
+    console.log("roomname:", roomname);
+    return roomname;
+  };
+
+  // Get username from Django template context (if available)
+  const username = window.username || "Anonymous";
+
+  useEffect(() => {
+    // Setup websocket connection
+    const roomname = getRoomName();
+    ws.current = new window.WebSocket('ws://' + window.location.host + '/ws/chat/' + roomname + '/');
+
+    ws.current.onmessage = (event) => {
+      // Expecting event.data to be a JSON string with a 'message' and 'user' field
+      try {
+        const data = JSON.parse(event.data);
+        setMessages((prev) => [...prev, { text: data.message, user: data.user || "other" }]);
+      } catch (e) {
+        // fallback: treat as plain text
+        setMessages((prev) => [...prev, { text: event.data, user: "other" }]);
+      }
+    };
+
+    ws.current.onclose = (event) => {
+      setMessages((prev) => [
+        ...prev,
+        { text: "Disconnected from chat. Redirecting to homepage in 5 seconds...", user: "system" }
+      ]);
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 5000);
+    };
+
+    return () => {
+      ws.current && ws.current.close();
+    };
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -13,8 +56,9 @@ const ChatArea = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (input.trim()) {
-      setMessages([...messages, { text: input, user: "user" }]);
+    if (input.trim() && ws.current && ws.current.readyState === 1) {
+      // Send message to websocket, including username
+      ws.current.send(JSON.stringify({ message: input, user: username }));
       setInput("");
     }
   };

@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),    # Home page
-    #path('chat/<str:room_name>/', views.room, name='room'),  # Chat room page
+    path('chat/<str:room_name>/', views.room, name='room'),  # Chat room page
     #path('create_room/', views.create_room, name='create_room'),  # Create a new chat room
     #path('join_room/', views.join_room, name='join_room'),  # Join an existing chat room
     #path('leave_room/<str:room_name>/', views.leave_room, name='leave_room'),  # Leave a chat room
