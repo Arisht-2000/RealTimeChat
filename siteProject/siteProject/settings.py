@@ -14,12 +14,16 @@ from pathlib import Path
 
 import environ
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # Initialize environment variables
 env = environ.Env(
     DEBUG=(bool, False),  # Default to False if not set
     ALLOWED_HOSTS=(list, []),  # Default to an empty list if not set
     SECRET_KEY=(str, 'django-insecure-ry#vg2j)(-5kr$f7#a=)m-29ob-+r6q2j6lqd)pcx=0ex!dmz#'),  # Default secret key
     STATIC_URL=(str, '/static/'),  # Default static URL
+    STATIC_ROOT=(str, str(BASE_DIR / 'staticfiles')),  # Default static root
     
     # Uncomment the following lines to set defaults for other environment variables
     
@@ -30,9 +34,6 @@ env = environ.Env(
     #REDIS_HOST=(str, ''),  # Default to localhost
     #REDIS_PORT=(int, 6379),  # Default to Redis port 6379
 )
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -153,6 +154,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = env('STATIC_URL')
+STATIC_ROOT = env('STATIC_ROOT')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
