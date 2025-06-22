@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Real-Time Chat{% endblock %}</title>
     <link rel="icon" type="image/svg+xml" href="{% static 'chatApp/img/logo.svg' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="{% static 'chatApp/css/main.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
@@ -15,7 +16,12 @@
             <span class="brand"><img src="{% static 'chatApp/img/logo.svg' %}" alt="Logo" style="height:1.2em;vertical-align:middle;margin-right:6px;"> Real-Time Chat</span>
             <span class="auth-links">
                 {% if user.is_authenticated %}
-                    <span style="font-size: 0.95rem;">Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Sign out</a></span>
+                    <span style="font-size: 0.95rem;">Welcome, {{ user.username }}!
+                        <form action="{% url 'logout' %}" method="post" style="display:inline; margin:0; padding:0;">
+                            {% csrf_token %}
+                            <button type="submit" style="background:none; border:none; color:#007bff; text-decoration:underline; cursor:pointer; font:inherit; padding:0; margin-left:4px;">Sign out</button>
+                        </form>
+                    </span>
                 {% else %}
                     <a href="{% url 'login' %}">Sign in</a> | <a href="{% url 'signup' %}">Sign up</a>
                 {% endif %}

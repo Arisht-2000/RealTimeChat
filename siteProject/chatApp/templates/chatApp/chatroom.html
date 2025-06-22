@@ -1,4 +1,5 @@
 {% extends "chatApp/base.html" %}
+{% load static %}
 {% block title %}Chatroom - Real-Time Chat{% endblock %}
 {% block extra_css %}
     <style>
@@ -24,14 +25,19 @@
     <script>
       window.username = "{{ request.user.username|escapejs }}";
     </script>
-    <!-- React and your bundle should be loaded here -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="{% static 'chatApp/ChatArea.bundle.umd.cjs' %}"></script>
-    <script>
-        if (window.React && window.ReactDOM && window.ChatArea) {
-            const container = document.getElementById('react-chat');
-            window.ReactDOM.createRoot(container).render(window.React.createElement(window.ChatArea));
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19.1.0",
+          "react-dom/client": "https://esm.sh/react-dom@19.1.0/client"
         }
+      }
+    </script>
+    <script type="module">
+      import React from "react";
+      import { createRoot } from "react-dom/client";
+      import ChatArea from "{% static 'chatApp/ChatArea.bundle.js' %}";
+      const container = document.getElementById('react-chat');
+      createRoot(container).render(React.createElement(ChatArea));
     </script>
 {% endblock %}

@@ -10,7 +10,7 @@ const ChatArea = () => {
 
   // Get roomname from URL (assuming /chatroom/<roomname>/)
   const getRoomName = () => {
-    const match = window.location.pathname.match(/\/chatroom\/(.+?)\//);
+    const match = window.location.pathname.match(/\/chatroom\/([^/]+)\//);
     const roomname = match ? match[1] : "default";
     console.log("roomname:", roomname);
     return roomname;
@@ -35,7 +35,7 @@ const ChatArea = () => {
       }
     };
 
-    ws.current.onclose = (event) => {
+    ws.current.onclose = () => {
       setMessages((prev) => [
         ...prev,
         { text: "Disconnected from chat. Redirecting to homepage in 5 seconds...", user: "system" }
@@ -46,12 +46,15 @@ const ChatArea = () => {
     };
 
     return () => {
-      ws.current && ws.current.close();
+      if (ws.current) ws.current.close();
     };
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll to bottom when messages change
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
   const handleSubmit = (e) => {
