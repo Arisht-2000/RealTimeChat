@@ -51,3 +51,6 @@ coverage.xml
 # Miscellaneous
 .DS_Store
 Thumbs.db
+
+# React build output
+siteProject/chatApp/static/chatApp/
