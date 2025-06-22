@@ -1,0 +1,20 @@
+{% extends "chatApp/base.html" %}
+{% block title %}Sign Up - Real-Time Chat{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <span class="brand"><i class="fas fa-comments"></i> Real-Time Chat</span>
+            <span class="auth-links">
+                <span style="font-size: 0.95rem;">
+                    Already have an account? <a href="{% url 'login' %}">Sign in</a>
+                </span>
+            </span>
+        </div>
+        <h2>Sign Up</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+{% endblock %}

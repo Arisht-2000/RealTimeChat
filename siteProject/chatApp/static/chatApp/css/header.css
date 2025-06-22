@@ -1,0 +1,23 @@
+/* Header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007bff;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 20px;
+}
+.brand {
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.auth-links a {
+    color: #fff;
+    text-decoration: underline;
+    margin-left: 5px;
+}

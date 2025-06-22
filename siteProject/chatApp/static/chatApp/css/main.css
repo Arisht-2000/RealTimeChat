@@ -1,0 +1,21 @@
+/* Shared main styles for all pages */
+@import url('./header.css');
+@import url('./footer.css');
+@import url('./form.css');
+@import url('./responsive.css');
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    margin: 40px auto 0 auto;
+}

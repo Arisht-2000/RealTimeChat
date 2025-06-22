@@ -1,9 +1,13 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.index, name='index'),    # Home page
     path('chat/<str:room_name>/', views.room, name='room'),  # Chat room page
+    path('signup/', views.signup, name='signup'),
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
     #path('create_room/', views.create_room, name='create_room'),  # Create a new chat room
     #path('join_room/', views.join_room, name='join_room'),  # Join an existing chat room
     #path('leave_room/<str:room_name>/', views.leave_room, name='leave_room'),  # Leave a chat room
@@ -35,9 +39,4 @@ urlpatterns = [
     #path('feedback/', views.feedback, name='feedback'),  # User feedback page
     #path('report_bug/', views.report_bug, name='report_bug'),  # Report a bug page
     #path('feature_request/', views.feature_request, name='feature_request'),  # Feature request
-    #path('logout/', views.logout_view, name='logout'),  # Logout user
-    #path('login/', views.login_view, name='login'),  # Login page
-    #path('register/', views.register, name='register'),  # User registration page
-    #path('activate/<str:uidb64>/<str:token>/', views.activate, name='activate'),  # Account activation
-    #path('resend_activation/', views.resend_activation, name='resend_activation'),  # Resend activation email
 ]

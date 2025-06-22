@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatroom</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% extends "chatApp/base.html" %}
+{% block title %}Chatroom - Real-Time Chat{% endblock %}
+{% block extra_css %}
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
         .chat-container {
             background: #fff;
             max-width: 600px;
@@ -26,52 +13,25 @@
             height: 80vh;
             overflow: hidden;
         }
-        .chat-header {
-            background: #007bff;
-            color: #fff;
-            padding: 18px 24px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        @media (max-width: 700px) {
-            .chat-container {
-                max-width: 98vw;
-                height: 90vh;
-            }
-        }
-        @media (max-width: 480px) {
-            .chat-header {
-                font-size: 1rem;
-                padding: 12px 10px;
-            }
-        }
     </style>
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <div class="chat-container">
-        <div class="chat-header">
-            <span><i class="fas fa-comments"></i> Chatroom</span>
-            <span style="font-size: 0.9rem; opacity: 0.8;">Online: <span id="onlineCount">1</span></span>
-        </div>
         <div id="react-chat"></div>
     </div>
+{% endblock %}
+{% block extra_js %}
     <script>
       window.username = "{{ request.user.username|escapejs }}";
     </script>
     <!-- React and your bundle should be loaded here -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <!-- Replace the path below with the actual path to your bundled ChatArea component -->
     <script src="{% static 'chatApp/ChatArea.bundle.umd.cjs' %}"></script>
     <script>
-        // Mount React ChatArea component if bundle is loaded
         if (window.React && window.ReactDOM && window.ChatArea) {
             const container = document.getElementById('react-chat');
             window.ReactDOM.createRoot(container).render(window.React.createElement(window.ChatArea));
         }
     </script>
-</body>
-</html>
+{% endblock %}
