@@ -95,6 +95,7 @@ const S = () => {
         "input",
         {
           type: "text",
+          id: "chatInput",
           value: n,
           onChange: (t) => l(t.target.value),
           placeholder: "Type your message...",

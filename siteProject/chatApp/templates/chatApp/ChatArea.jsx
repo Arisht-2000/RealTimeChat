@@ -92,6 +92,7 @@ const ChatArea = () => {
       <form className="chat-input" onSubmit={handleSubmit} style={{display: "flex", padding: 16, background: "#f1f3f6", borderTop: "1px solid #e0e0e0"}}>
         <input
           type="text"
+          id="chatInput"
           value={input}
           onChange={e => setInput(e.target.value)}
           placeholder="Type your message..."

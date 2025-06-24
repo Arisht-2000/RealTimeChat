@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Initialize environment variables
 env = environ.Env(
-    DEBUG=(bool, False),  # Default to False if not set
+    DEBUG=(bool, True),  # Default to True if not set
     ALLOWED_HOSTS=(list, []),  # Default to an empty list if not set
     SECRET_KEY=(str, 'django-insecure-ry#vg2j)(-5kr$f7#a=)m-29ob-+r6q2j6lqd)pcx=0ex!dmz#'),  # Default secret key
     STATIC_URL=(str, '/static/'),  # Default static URL
